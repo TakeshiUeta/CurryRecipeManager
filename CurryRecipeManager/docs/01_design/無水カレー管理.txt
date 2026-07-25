@@ -1,0 +1,80 @@
+【無水カレー管理】
+① 要件（何を作るか）      ★
+	・レシピを一覧化し、アコーディオンでその調理内容を記載するようにする（STEP1）
+	・DBにて材料を追加。調理内容の上部にその内容を追加（STEP2）
+	・実際の調理結果を画面遷移で表示（STEP3）
+	
+
+② 画面一覧                ★
+③ 画面遷移図              ★
+④ 処理フロー（簡易）      ★
+⑤ ER図                    ★
+⑥ テーブル定義            ★
+⑦ 実装
+作成理由
+
+概要
+・レシピ画面を一覧で表示
+・レシピをクリックしたら詳細を表示するようにする。
+・基本は一画面で表示
+・材料、結果は後で作る一旦CRUDを思い出す。
+
+準備しないといけないもの
+【データベース】
+・レシピ
+	項目			物理名		論理名
+	id				BIGINT		PK
+	recipe_name		VARCHAR		レシピ名
+	cooking_time	INTEGER		調理時間(分)
+	evaluation		INTEGER		自己評価(1～5)
+	created_at		TIMESTAMP	登録日時
+	updated_at		TIMESTAMP	更新日時
+	
+	
+・レシピ内容
+| 項目          |    
+|recipe_step    |
+|-------------- |
+|id 			PK          |
+|recipe_id 		FK   |
+|step_no        |
+|content	    |
+	
+	
+・材料
+| 項目              
+| --------------- |
+| id              |
+| recipe_id       |
+| ingredient_name |
+| amount          |
+| unit            |
+
+・結果
+| 項目        |
+| ----------- |
+| id          |
+| recipe_id   |
+| cooked_date |
+| score       |
+| memo        |
+
+【設計書】
+・画面一覧
+・画面遷移図
+・画面ラフ（ワイヤーフレーム）
+・ER図
+・テーブル定義
+【クラス】
+<formパッケージ>
+・レシピ
+・材料
+・結果
+<entityパッケージ>
+・レシピ
+・材料
+・結果
+
+<serviceパッケージ>
+<controller>
+<repository>
