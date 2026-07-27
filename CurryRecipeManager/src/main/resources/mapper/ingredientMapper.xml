@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--MapperとXMLのマッピング -->
+<mapper
+	namespace="com.takeshiueta.curryrecipemanager.mapper.IngredientMapper">
+	<!--マッピング定義（材料） -->
+	<resultMap
+		type="com.takeshiueta.curryrecipemanager.entity.Ingredient"
+		id="ingredient">
+		<id column="id" property="id" />
+		<result column="recipe_id" property="recipeId" />
+		<result column="ingredient_name" property="ingredientName" />
+		<result column="amount" property="amount" />
+		<result column="unit" property="unit" />
+	</resultMap>
+
+	<!--材料1件取得 -->
+	<select id="findById" resultMap="ingredient">
+		SELECT *
+		FROM ingredient
+		WHERE
+		id=#{id}
+	</select>
+
+	<!--レシピidと紐付いている材料を取得 -->
+	<select id="findByRecipeId" resultMap="ingredient">
+	    SELECT *
+	    FROM ingredient
+	    WHERE recipe_id = #{recipeId}
+	</select>
+	
+	<!--材料全件表示 -->
+	<select id="findAll" resultMap="ingredient">
+		SELECT * FROM ingredient
+	</select>
+
+	<!--材料登録 -->
+	<insert id="insertOne" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO ingredient (
+		recipe_id,
+		ingredient_name,
+		amount,
+		unit
+		)values(
+		#{recipeId},
+		#{ingredientName},
+		#{amount},
+		#{unit}
+		)
+	</insert>
+
+	<!--材料1件更新 -->
+	<update id="updateOne">
+		UPDATE ingredient SET
+		ingredient_name = #{ingredientName},
+		amount = #{amount},
+		unit = #{unit}
+		WHERE
+		id = #{id}
+	</update>
+
+	<!--材料1件削除 -->
+	<delete id="deleteOne">
+		DELETE FROM ingredient WHERE id = #{id}
+	</delete>
+			
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--MapperとXMLのマッピング -->
+<mapper
+	namespace="com.takeshiueta.curryrecipemanager.mapper.RecipeMapper">
+	<!--マッピング定義（レシピ） -->
+	<resultMap
+		type="com.takeshiueta.curryrecipemanager.entity.Recipe" id="recipe">
+		<id column="id" property="id" />
+		<result column="recipe_name" property="recipeName" />
+		<result column="cooking_time" property="cookingTime" />
+		<result column="evaluation" property="evaluation"></result>
+		<result column="created_at" property="createdAt" />
+		<result column="updated_at" property="updatedAt" />
+	</resultMap>
+
+	<!--レシピ1件取得 -->
+	<select id="findById" resultMap="recipe">
+		SELECT *
+		FROM recipe
+		WHERE id=#{id}
+	</select>
+
+	<!--レシピ全件表示 -->
+	<select id="findAll" resultMap="recipe">
+		SELECT * FROM recipe
+	</select>
+
+	<!--レシピ登録 -->
+	<insert id="insertOne" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO recipe (
+		recipe_name,
+		cooking_time,
+		evaluation,
+		created_at,
+		updated_at
+		)values(
+		#{recipeName},
+		#{cookingTime},
+		#{evaluation},
+		#{createdAt},
+		#{updatedAt}
+		)
+	</insert>
+</mapper>

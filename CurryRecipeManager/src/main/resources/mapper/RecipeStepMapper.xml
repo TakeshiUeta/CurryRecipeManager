@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--MapperとXMLのマッピング -->
+<mapper
+	namespace="com.takeshiueta.curryrecipemanager.mapper.RecipeStepMapper">
+	<!--マッピング定義（調理手順） -->
+	<resultMap
+		type="com.takeshiueta.curryrecipemanager.entity.RecipeStep"
+		id="recipeStep">
+		<id column="id" property="id" />
+		<result column="recipe_id" property="recipeId" />
+		<result column="step_no" property="stepNo" />
+		<result column="content" property="content" />
+	</resultMap>
+
+	<!--調理手順1件取得 -->
+	<select id="findById" resultMap="recipeStep">
+		SELECT *
+		FROM recipe_step
+		WHERE
+		id = #{id}
+	</select>
+
+	<!--レシピidと紐付いている調理手順を取得 -->
+	<select id="findByRecipeId" resultMap="recipeStep">
+		SELECT *
+		FROM recipe_step
+		WHERE recipe_id = #{recipeId}
+	</select>
+
+	<!--調理手順全件表示 -->
+	<select id="findAll" resultMap="recipeStep">
+		SELECT * FROM recipe_step
+	</select>
+
+	<!--調理手順登録 -->
+	<insert id="insertOne" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO recipe_step (
+		recipe_id,
+		step_no,
+		content
+		)values(
+		#{recipeId},
+		#{stepNo},
+		#{content}
+		)
+	</insert>
+
+	<!--調理手順更新 -->
+	<update id="updateOne">
+		UPDATE recipe_step set
+		step_no = #{stepNo},
+		content = #{content}
+		WHERE id = #{id}
+	</update>
+
+	<!--調理手順削除 -->
+	<delete id="deleteOne">
+		DELETE FROM recipe_step
+		WHERE id = #{id}
+	</delete>
+</mapper>

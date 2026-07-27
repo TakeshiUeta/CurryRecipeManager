@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--MapperとXMLのマッピング -->
+<mapper
+	namespace="com.takeshiueta.curryrecipemanager.mapper.CookingResultMapper">
+	<!--マッピング定義（調理結果） -->
+	<resultMap
+		type="com.takeshiueta.curryrecipemanager.entity.CookingResult"
+		id="cookingResult">
+		<id column="id" property="id" />
+		<result column="recipe_id" property="recipeId" />
+		<result column="cooked_date" property="cookedDate" />
+		<result column="score" property="score" />
+		<result column="memo" property="memo" />
+	</resultMap>
+
+	<!--調理結果1件取得 -->
+	<select id="findById" resultMap="cookingResult">
+		SELECT *
+		FROM cooking_result
+		WHERE
+		id = #{id}
+	</select>
+
+	<!--レシピidと紐付いている調理結果を取得 -->
+	<select id="findByRecipeId" resultMap="cookingResult">
+		SELECT *
+		FROM cooking_result
+		WHERE recipe_id = #{recipeId}
+	</select>
+
+	<!--調理結果全件表示 -->
+	<select id="findAll" resultMap="cookingResult">
+		SELECT * FROM cooking_result
+	</select>
+
+	<!--調理結果登録 -->
+	<insert id="insertOne" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO cooking_result (
+		recipe_id,
+		cooked_date,
+		score,
+		memo
+		)values(
+		#{recipeId},
+		#{cookedDate},
+		#{score},
+		#{memo}
+		)
+	</insert>
+
+	<!--調理結果更新 -->
+	<update id="updateOne">
+		UPDATE cooking_result set
+		score = #{score},
+		memo = #{memo}
+		WHERE id = #{id}
+	</update>
+
+	<!--調理結果削除 -->
+	<delete id="deleteOne">
+		DELETE FROM cooking_result
+		WHERE id = #{id}
+	</delete>
+</mapper>
