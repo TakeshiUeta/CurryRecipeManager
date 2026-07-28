@@ -20,7 +20,7 @@ import com.takeshiueta.curryrecipemanager.mapper.RecipeMapper;
 import com.takeshiueta.curryrecipemanager.mapper.RecipeStepMapper;
 
 /**
- * レシピ一覧画面のビジネスロジック
+ * レシピ一覧画面ビジネスロジック
  */
 @Service
 public class RecipeService {
