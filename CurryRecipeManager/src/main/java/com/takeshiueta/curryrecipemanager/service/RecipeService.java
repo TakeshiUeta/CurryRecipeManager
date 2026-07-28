@@ -69,6 +69,7 @@ public class RecipeService {
 					.map(recipeStep -> modelMapper.map(recipeStep, RecipeStepForm.class)).toList();
 			// レシピ詳細にそれぞれの値をセット
 			// レシピ
+			recipeDetail.setId(recipeId);
 			recipeDetail.setRecipeName(recipeName);
 			recipeDetail.setCookingTime(cookingTime);
 			recipeDetail.setEvaluation(evaluation);

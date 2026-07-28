@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>無水カレー レシピ一覧</title>
+</head>
+
+<body>
+	<h1>無水カレー レシピ一覧</h1>
+	<div th:each="recipe : ${recipeList.recipes}">
+		<hr>
+		<h2 th:text="${recipe.recipeName}">レシピ名</h2>
+		<!-- レシピ基本情報 -->
+		<div>
+			<p>
+				調理時間： <span th:text="${recipe.cookingTime}"></span> 分
+			</p>
+			<p>
+				評価： <span th:if="${recipe.evaluation == 5}">★★★★★</span> <span
+					th:if="${recipe.evaluation == 4}">★★★★☆</span> <span
+					th:if="${recipe.evaluation == 3}">★★★☆☆</span> <span
+					th:if="${recipe.evaluation == 2}">★★☆☆☆</span> <span
+					th:if="${recipe.evaluation == 1}">★☆☆☆☆</span>
+			</p>
+		</div>
+		<!-- 材料一覧 -->
+		<ul>
+			<li th:each="ingredient : ${recipe.ingredients}">
+				<form th:action="@{/recipe/ingredient/update}" method="post">
+					<input type="hidden" name="id" th:value="${ingredient.id}">
+					<input type="hidden" name="recipeId"
+						th:value="${ingredient.recipeId}"> <input type="text"
+						name="ingredientName" th:value="${ingredient.ingredientName}">
+					<input type="text" name="amount" th:value="${ingredient.amount}">
+					<input type="text" name="unit" th:value="${ingredient.unit}">
+					<button type="submit">保存</button>
+				</form>
+				<form th:action="@{/recipe/ingredient/delete}" method="post">
+					<input type="hidden" name="id" th:value="${ingredient.id}">
+					<button type="submit">削除</button>
+				</form>
+			</li>
+		</ul>
+		<!-- 材料追加 -->
+		<form th:action="@{/recipe/ingredient/insert}" method="post">
+			<input type="hidden" name="recipeId" th:value="${recipe.id}">
+			<input type="text" name="ingredientName" placeholder="材料名"> <input
+				type="text" name="amount" placeholder="分量"> <input
+				type="text" name="unit" placeholder="単位">
+			<button type="submit">材料追加</button>
+		</form>
+		<!-- 調理手順一覧 -->
+		<h3>調理手順</h3>
+		<ol>
+			<li th:each="step : ${recipe.recipeSteps}">
+			<span th:text="${step.stepNo}"> 手順番号 </span> ： <span th:text="${step.content}"> 手順内容 </span>
+			<form th:action="@{/recipe/recipeStep/update}" method="post">
+					<input type="hidden" name="id" th:value="${step.id}">
+					<input type="hidden" name="recipeId" th:value="${step.recipeId}"> 
+					<input type="number" name="stepNo" th:value="${step.stepNo}">
+					<input type="text" name="content" th:value="${step.content}">
+					<button type="submit">保存</button>
+			</form>
+			<form th:action="@{/recipe/recipeStep/delete}" method="post">
+				<input type="hidden" name="id" th:value="${step.id}">
+				<button type="submit">削除</button>
+			</form>
+			</li>
+		</ol>
+		<!-- 手順追加 -->
+		<form th:action="@{/recipe/recipeStep/insert}" method="post">
+			<input type="hidden" name="recipeId" th:value="${recipe.id}">
+			<input type="number" name="stepNo" placeholder="番号"> <input
+				type="text" name="content" placeholder="手順">
+			<button>手順追加</button>
+		</form>
+	</div>
+
+	<!-- レシピ登録 -->
+	<section>
+		<h3>▼新規登録 -</h3>
+		<form th:action="@{/recipe/insert}" th:object="${recipeForm}"
+			method="post">
+			<div>
+				<label>レシピ名</label> <input type="text" th:field="*{recipeName}">
+			</div>
+			<div>
+				<label>調理時間</label> <input type="number" th:field="*{cookingTime}">
+			</div>
+			<div>
+				<label>評価</label> <select th:field="*{evaluation}">
+					<option value="1">★☆☆☆☆</option>
+					<option value="2">★★☆☆☆</option>
+					<option value="3">★★★☆☆</option>
+					<option value="4">★★★★☆</option>
+					<option value="5">★★★★★</option>
+				</select>
+			</div>
+			<button type="submit">登録</button>
+		</form>
+	</section>
+</body>
+
+</html>

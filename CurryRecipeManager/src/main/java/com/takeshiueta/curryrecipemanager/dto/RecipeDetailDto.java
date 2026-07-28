@@ -12,6 +12,8 @@ import lombok.Data;
  * レシピ詳細画面に渡すデータ
  */
 public class RecipeDetailDto {
+	/** Id */
+	private Integer id;
 	/** レシピ名 */
 	private String recipeName;
 	/** 調理時間(分) */

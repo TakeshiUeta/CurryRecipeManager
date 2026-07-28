@@ -9,6 +9,8 @@ import jakarta.validation.constraints.NotNull;
  */
 @Data
 public class IngredientForm {
+	/**ID*/
+	private Integer id;
 	/** レシピID */
 	@NotNull
 	private Integer recipeId;
@@ -26,7 +28,8 @@ public class IngredientForm {
 	public IngredientForm() {
 	}
 
-	public IngredientForm(Integer recipeId, String ingredientName, String amount, String unit) {
+	public IngredientForm(Integer id,Integer recipeId, String ingredientName, String amount, String unit) {
+		this.id = id;
 		this.recipeId = recipeId;
 		this.ingredientName = ingredientName;
 		this.amount = amount;

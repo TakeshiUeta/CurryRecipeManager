@@ -34,15 +34,11 @@
 		INSERT INTO recipe (
 		recipe_name,
 		cooking_time,
-		evaluation,
-		created_at,
-		updated_at
+		evaluation
 		)values(
 		#{recipeName},
 		#{cookingTime},
-		#{evaluation},
-		#{createdAt},
-		#{updatedAt}
+		#{evaluation}
 		)
 	</insert>
 </mapper>

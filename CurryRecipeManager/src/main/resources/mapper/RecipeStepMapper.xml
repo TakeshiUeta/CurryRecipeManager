@@ -29,6 +29,7 @@
 		SELECT *
 		FROM recipe_step
 		WHERE recipe_id = #{recipeId}
+		ORDER BY step_no ASC
 	</select>
 
 	<!--調理手順全件表示 -->

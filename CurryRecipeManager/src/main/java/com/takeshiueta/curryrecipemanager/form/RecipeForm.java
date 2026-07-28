@@ -11,6 +11,8 @@ import lombok.Data;
  */
 @Data
 public class RecipeForm {
+	/**id*/
+	private Integer id;
 	/** レシピ名 */
 	@NotBlank
 	private String recipeName;
@@ -27,7 +29,8 @@ public class RecipeForm {
 	public RecipeForm() {
 	}
 
-	public RecipeForm(String recipeName, Integer cookingTime, Integer evaluation) {
+	public RecipeForm(Integer id,String recipeName, Integer cookingTime, Integer evaluation) {
+		this.id = id;
 		this.recipeName = recipeName;
 		this.cookingTime = cookingTime;
 		this.evaluation = evaluation;
