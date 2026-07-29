@@ -7,7 +7,7 @@ Spring Boot・MyBatis・Thymeleafを用いて開発した、
 
 データベース設計からバックエンド、画面実装まで一貫して実装しました。
 
-## 1. 開発背景
+## 2. 開発背景
 
 自身が調理した無水カレーのレシピや調理結果を記録・管理することを目的として開発しました。  
 単純なレシピ表示だけではなく、
@@ -261,6 +261,9 @@ erDiagram
 | cooking_date | 調理日       |
 | evaluation   | 出来栄え評価 |
 | memo         | メモ         |
+
+#### Excelでの設計書はこちら
+- CurryRecipeManager/docs/01_design/101画面遷移図 .xlsx
 
 ## 9. 設計・実装で工夫した点
 
