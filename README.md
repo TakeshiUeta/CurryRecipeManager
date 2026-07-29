@@ -348,6 +348,10 @@ main
 git clone https://github.com/TakeshiUeta/CurryRecipeManager.git
 cd CurryRecipeManager
 mvn spring-boot:run
+```
+
+起動後、以下のURLへアクセスしてください。
+``` text
 http://localhost:8080/recipe/sc101recipe-list
 ```
 
