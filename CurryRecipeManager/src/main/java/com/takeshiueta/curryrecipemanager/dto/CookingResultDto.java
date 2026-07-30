@@ -1,7 +1,6 @@
 package com.takeshiueta.curryrecipemanager.dto;
 
-import java.util.List;
-import com.takeshiueta.curryrecipemanager.form.CookingResultForm;
+import java.time.LocalDate;
 import lombok.Data;
 
 /**
@@ -9,6 +8,12 @@ import lombok.Data;
  */
 @Data
 public class CookingResultDto {
-	/** 調理結果一覧 */
-	private List<CookingResultForm> cookingResults;
+	/** レシピID */
+	private Integer recipeId;
+	/** 調理日付 */
+	private LocalDate cookedDate;
+	/** 出来栄え評価(1～5) */
+	private Integer score;
+	/** 一口メモ */
+	private String memo;
 }

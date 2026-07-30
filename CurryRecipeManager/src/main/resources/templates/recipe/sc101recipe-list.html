@@ -72,6 +72,21 @@
                 >★☆☆☆☆</span
               >
             </p>
+
+            <form
+              th:action="@{/cooking-result/sc102cooking-result}"
+              method="get"
+              class="d-inline"
+            >
+              <input type="hidden" name="recipeId" th:value="${recipe.id}" />
+              <button
+                type="submit"
+                class="btn btn-success recipe-action-button"
+              >
+                調理結果
+              </button>
+            </form>
+
             <!-- 材料一覧 -->
             <h5 class="border-bottom pb-2 mt-4">🥕 材料一覧</h5>
             <div

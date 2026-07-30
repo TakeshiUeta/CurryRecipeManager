@@ -12,7 +12,6 @@ import com.takeshiueta.curryrecipemanager.dto.RecipeListDto;
 import com.takeshiueta.curryrecipemanager.form.IngredientForm;
 import com.takeshiueta.curryrecipemanager.form.RecipeForm;
 import com.takeshiueta.curryrecipemanager.form.RecipeStepForm;
-import com.takeshiueta.curryrecipemanager.service.CookingResultService;
 import com.takeshiueta.curryrecipemanager.service.RecipeService;
 
 /**
@@ -23,8 +22,6 @@ import com.takeshiueta.curryrecipemanager.service.RecipeService;
 public class RecipeController {
 	@Autowired
 	private RecipeService recipeService;
-	@Autowired
-	private CookingResultService cookingResultService;
 
 	// レシピ一覧画面遷移
 	@GetMapping("/sc101recipe-list")
@@ -100,4 +97,5 @@ public class RecipeController {
 		// 画面遷移
 		return "redirect:/recipe/sc101recipe-list";
 	}
+
 }

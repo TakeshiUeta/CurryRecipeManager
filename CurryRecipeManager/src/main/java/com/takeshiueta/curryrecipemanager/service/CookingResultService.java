@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.takeshiueta.curryrecipemanager.dto.CookingResultDto;
 import com.takeshiueta.curryrecipemanager.entity.CookingResult;
 import com.takeshiueta.curryrecipemanager.form.CookingResultForm;
 import com.takeshiueta.curryrecipemanager.mapper.CookingResultMapper;
@@ -19,7 +20,6 @@ public class CookingResultService {
 	/** 調理結果マッパー */
 	@Autowired
 	private CookingResultMapper cookingResultMapper;
-
 	/** Modelマッパー(オブジェクト変換) */
 	@Autowired
 	private ModelMapper modelMapper;
@@ -44,6 +44,14 @@ public class CookingResultService {
 		// FormをEntityに変換
 		CookingResult entity = modelMapper.map(form, CookingResult.class);
 		cookingResultMapper.updateOne(entity);
+	}
+
+	/** レシピIDに紐付く調理結果をDTO形式で取得 */
+	public List<CookingResultDto> createCookingResultDtos(Integer recipeId) {
+		// レシピidと紐付いている調理結果を取得
+		List<CookingResult> entities = this.getCookingResultsByRecipeId(recipeId);
+		// EntityをDtoに変換
+		return entities.stream().map(cookingResult -> modelMapper.map(cookingResult, CookingResultDto.class)).toList();
 	}
 
 }
