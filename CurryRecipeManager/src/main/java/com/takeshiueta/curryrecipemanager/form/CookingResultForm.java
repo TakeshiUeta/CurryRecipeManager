@@ -13,6 +13,8 @@ import lombok.Data;
  */
 @Data
 public class CookingResultForm {
+	/** ID */
+	private Integer id;
 	/** レシピID */
 	@NotNull
 	private Integer recipeId;
@@ -31,7 +33,8 @@ public class CookingResultForm {
 	public CookingResultForm() {
 	}
 
-	public CookingResultForm(Integer recipeId, LocalDate cookedDate, Integer score, String memo) {
+	public CookingResultForm(Integer id, Integer recipeId, LocalDate cookedDate, Integer score, String memo) {
+		this.id = id;
 		this.recipeId = recipeId;
 		this.cookedDate = cookedDate;
 		this.score = score;

@@ -26,16 +26,18 @@
       >
         <div class="card-header bg-success-subtle text-secondary-emphasis">
           <button
-            class="btn w-100 text-start recipe-title"
+            class="btn w-100 d-flex justify-content-between align-items-center text-decoration-none text-dark"
             type="button"
             data-bs-toggle="collapse"
             th:data-bs-target="'#recipe-' + ${recipe.id}"
           >
-            <span class="me-2 toggle-icon">＋</span>
-            <span class="me-2">🍛</span>
-            <span class="recipe-title" th:text="${recipe.recipeName}">
-              レシピ名
+            <span>
+              <span class="me-2">🍛</span>
+              <span class="recipe-title" th:text="${recipe.recipeName}">
+                レシピ名
+              </span>
             </span>
+            <span class="me-2 toggle-icon">＋</span>
           </button>
         </div>
         <!-- レシピ基本情報 -->
