@@ -9,9 +9,6 @@ import com.takeshiueta.curryrecipemanager.entity.Recipe;
  */
 @Mapper
 public interface RecipeMapper {
-	/** レシピ名だけ取得 */
-	public String findRecipeNameById(Integer id);
-
 	/** レシピ1件取得 */
 	public Recipe findById(Integer id);
 

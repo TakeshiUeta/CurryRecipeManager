@@ -28,10 +28,8 @@
 	<!--レシピidと紐付いている調理結果を取得 -->
 	<select id="findByRecipeId" resultMap="cookingResult">
 		SELECT *
-		FROM
-		cooking_result
+		FROM cooking_result
 		WHERE recipe_id = #{recipeId}
-		ORDER BY cooked_date
 	</select>
 
 	<!--調理結果全件表示 -->
@@ -57,10 +55,8 @@
 	<!--調理結果更新 -->
 	<update id="updateOne">
 		UPDATE cooking_result set
-		cooked_date = #{cookedDate},
 		score = #{score},
-		memo =
-		#{memo}
+		memo = #{memo}
 		WHERE id = #{id}
 	</update>
 

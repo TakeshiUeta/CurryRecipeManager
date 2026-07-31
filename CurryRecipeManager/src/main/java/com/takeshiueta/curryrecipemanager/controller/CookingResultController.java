@@ -1,5 +1,7 @@
 package com.takeshiueta.curryrecipemanager.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,11 +27,9 @@ public class CookingResultController {
 	// 調理結果ボタン押下時
 	@GetMapping("/sc102cooking-result")
 	public String getSc102CookingResult(Model model, @RequestParam Integer recipeId) {
-		CookingResultDto dto = cookingResultService.createCookingResultDto(recipeId);
-		CookingResultForm cookingResultForm = new CookingResultForm();
-		cookingResultForm.setRecipeId(recipeId);
-		model.addAttribute("cookingResultForm", cookingResultForm);
-		model.addAttribute("dto", dto);
+		List<CookingResultDto> dtos = cookingResultService.createCookingResultDtos(recipeId);
+		model.addAttribute("dtos", dtos);
+		model.addAttribute("recipeId", recipeId);
 		// 画面遷移
 		return "cooking-result/sc102cooking-result";
 	}
@@ -51,14 +51,4 @@ public class CookingResultController {
 		// 画面遷移
 		return "redirect:/cooking-result/sc102cooking-result?recipeId=" + form.getRecipeId();
 	}
-
-	// 調理結果削除
-	@PostMapping("/delete")
-	public String postDeleteCookingResult(@RequestParam Integer id, @RequestParam Integer recipeId) {
-		// 削除
-		cookingResultService.deleteOneCookingResult(id);
-		// 画面遷移
-		return "redirect:/cooking-result/sc102cooking-result?recipeId=" + recipeId;
-	}
-
 }

@@ -1,19 +1,19 @@
 @charset "UTF-8";
 /* レシピタイトル */
 .recipe-title {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #495057;
+	font-size: 1.3rem;
+	font-weight: bold;
+	color: #495057;
 }
 
 /* アコーディオン開閉ボタン */
 .recipe-title:hover {
-  color: #0d6efd;
+	color: #0d6efd;
 }
 
 /* カードヘッダー */
 .recipe-card .card-header {
-  cursor: pointer;
+	cursor: pointer;
 }
 /* ==========================
    無水カレー管理システム
@@ -22,8 +22,14 @@
 
 /* レシピカード */
 .recipe-card {
-  margin-bottom: 1.5rem;
-  border-radius: 12px;
+	margin-bottom: 1.5rem;
+	border-radius: 12px;
+}
+
+/* レシピタイトル */
+.recipe-title {
+	font-size: 1.2rem;
+	font-weight: bold;
 }
 
 /* ==========================
@@ -32,17 +38,17 @@
 
 /* 材料名 */
 .ingredient-name-input {
-  width: 220px;
+	width: 220px;
 }
 
 /* 分量 */
 .ingredient-amount-input {
-  width: 120px;
+	width: 120px;
 }
 
 /* 単位 */
 .ingredient-unit-input {
-  width: 80px;
+	width: 80px;
 }
 
 /* ==========================
@@ -51,27 +57,27 @@
 
 /* 手順番号 */
 .recipe-step-number {
-  width: 90px;
+	width: 90px;
 }
 
 /* 手順内容 */
 .recipe-step-content {
-  width: 450px;
-  min-height: 80px;
-  resize: vertical;
+	width: 450px;
+	min-height: 80px;
+	resize: vertical;
 }
 
 /* ==========================
    レシピ登録フォーム
    ========================== */
 .recipe-form-input {
-  max-width: 400px;
+	max-width: 400px;
 }
 
 /* ==========================
    ボタン
    ========================== */
 .recipe-action-button {
-  white-space: nowrap;
-  min-width: 70px;
+	white-space: nowrap;
+	min-width: 70px;
 }
