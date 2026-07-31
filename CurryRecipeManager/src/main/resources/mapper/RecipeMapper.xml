@@ -21,6 +21,15 @@
 	<select id="findById" resultMap="recipe">
 		SELECT *
 		FROM recipe
+		WHERE
+		id=#{id}
+	</select>
+
+	<!--レシピ名だけ取得 -->
+	<select id="findRecipeNameById" resultType="String">
+		SELECT
+		recipe_name
+		FROM recipe
 		WHERE id=#{id}
 	</select>
 

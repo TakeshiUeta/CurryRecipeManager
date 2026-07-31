@@ -1,7 +1,7 @@
 package com.takeshiueta.curryrecipemanager.dto;
 
 import java.util.List;
-import com.takeshiueta.curryrecipemanager.form.CookingResultForm;
+
 import lombok.Data;
 
 /**
@@ -9,6 +9,10 @@ import lombok.Data;
  */
 @Data
 public class CookingResultDto {
+	/** レシピID */
+	private Integer recipeId;
+	/** レシピ名*/
+	private String recipeName;
 	/** 調理結果一覧 */
-	private List<CookingResultForm> cookingResults;
+    private List<CookingResultDetailDto> results;
 }
