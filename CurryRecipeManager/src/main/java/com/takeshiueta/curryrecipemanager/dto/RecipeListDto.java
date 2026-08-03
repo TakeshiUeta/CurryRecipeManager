@@ -1,6 +1,7 @@
 package com.takeshiueta.curryrecipemanager.dto;
 
 import java.util.List;
+
 import lombok.Data;
 
 /**

@@ -33,6 +33,13 @@
 		WHERE id=#{id}
 	</select>
 
+	<!--レシピID一覧取得 -->
+	<select id="findRecipeIds" resultType="java.lang.Integer">
+		SELECT
+		id
+		FROM recipe
+	</select>
+
 	<!--レシピ全件表示 -->
 	<select id="findAll" resultMap="recipe">
 		SELECT * FROM recipe

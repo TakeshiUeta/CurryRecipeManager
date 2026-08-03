@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 /**
- * 調理結果画面に渡すデータ
+ * 調理結果画面dto
  */
 @Data
 public class CookingResultDto {

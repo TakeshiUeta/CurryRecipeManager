@@ -44,6 +44,10 @@
 .ingredient-unit-input {
   width: 80px;
 }
+.ingredient-field {
+  display: flex;
+  flex-direction: column;
+}
 
 /* ==========================
    調理手順入力
@@ -74,4 +78,15 @@
 .recipe-action-button {
   white-space: nowrap;
   min-width: 70px;
+}
+.button-field {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================
+   バリデーション
+   ========================== */
+.error-message {
+  min-height: 20px;
 }

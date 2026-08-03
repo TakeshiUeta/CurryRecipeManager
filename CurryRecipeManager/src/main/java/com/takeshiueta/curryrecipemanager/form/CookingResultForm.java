@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class CookingResultForm {
 	@Max(value = 5)
 	private Integer score;
 	/** 一口メモ */
+	@NotBlank
 	@Size(max = 500)
 	private String memo;
 

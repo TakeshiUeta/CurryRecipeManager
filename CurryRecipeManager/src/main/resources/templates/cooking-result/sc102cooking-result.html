@@ -41,6 +41,7 @@
                   th:field="*{cookedDate}"
                   class="form-control"
                 />
+                <div class="text-danger" th:errors="*{cookedDate}"></div>
               </div>
 
               <div class="mb-3">
@@ -53,7 +54,6 @@
                   <option value="5">★★★★★</option>
                 </select>
               </div>
-
               <div class="mb-3">
                 <label class="form-label"> メモ </label>
                 <textarea
@@ -61,6 +61,7 @@
                   class="form-control"
                   rows="3"
                 ></textarea>
+                <div class="text-danger" th:errors="*{memo}"></div>
               </div>
 
               <button
@@ -110,8 +111,13 @@
             </button>
           </div>
           <!-- 折りたたみ対象 -->
-          <div th:id="'result-' + ${result.id}" class="collapse">
+          <div
+            th:id="'result-' + ${result.id}"
+            class="collapse"
+            th:classappend="${openResultId == result.id} ? ' show'"
+          >
             <div class="card-body">
+              <!-- 更新フォーム -->
               <form
                 th:id="'updateForm-' + ${result.id}"
                 th:action="@{/cooking-result/update}"
@@ -133,6 +139,10 @@
                       class="form-control"
                       th:value="${result.cookedDate}"
                     />
+                    <div
+                      class="text-danger error-message"
+                      th:text="${result.cookedDateError}"
+                    ></div>
                   </div>
                   <div class="col-md-3">
                     <label class="form-label">評価</label>
@@ -156,12 +166,18 @@
                   </div>
                   <div class="col-md-6">
                     <label class="form-label">メモ</label>
-                    <textarea
-                      name="memo"
-                      class="form-control"
-                      rows="3"
-                      th:text="${result.memo}"
-                    ></textarea>
+                    <div>
+                      <textarea
+                        name="memo"
+                        class="form-control"
+                        rows="3"
+                        th:text="${result.memo}"
+                      ></textarea>
+                    </div>
+                    <div
+                      class="text-danger error-message"
+                      th:text="${result.memoError}"
+                    ></div>
                   </div>
                 </div>
               </form>

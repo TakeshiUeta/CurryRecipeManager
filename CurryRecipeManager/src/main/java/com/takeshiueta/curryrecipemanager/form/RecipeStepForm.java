@@ -24,6 +24,12 @@ public class RecipeStepForm {
 	@NotBlank
 	@Size(max = 500)
 	private String content;
+
+	/** 手順番号エラー */
+	private String stepNoError;
+
+    /** 手順内容エラー */
+    private String contentError;
 	
 	/** コンストラクタ */
 	public RecipeStepForm() {

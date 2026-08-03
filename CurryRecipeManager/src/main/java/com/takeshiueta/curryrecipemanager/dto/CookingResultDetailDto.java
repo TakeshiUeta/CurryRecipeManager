@@ -17,4 +17,8 @@ public class CookingResultDetailDto {
 	private Integer score;
 	/** 一口メモ */
 	private String memo;
+	/** 調理日付エラー*/
+	private String  cookedDateError;
+	/** 一口メモエラー*/
+	private String  memoError;
 }

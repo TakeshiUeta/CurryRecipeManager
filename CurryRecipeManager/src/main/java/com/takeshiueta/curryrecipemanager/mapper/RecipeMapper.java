@@ -12,6 +12,9 @@ public interface RecipeMapper {
 	/** レシピ名だけ取得 */
 	public String findRecipeNameById(Integer id);
 
+	/** レシピID一覧取得 */
+	public List<Integer> findRecipeIds();
+
 	/** レシピ1件取得 */
 	public Recipe findById(Integer id);
 

@@ -31,7 +31,7 @@
 	    FROM ingredient
 	    WHERE recipe_id = #{recipeId}
 	</select>
-	
+		
 	<!--材料全件表示 -->
 	<select id="findAll" resultMap="ingredient">
 		SELECT * FROM ingredient

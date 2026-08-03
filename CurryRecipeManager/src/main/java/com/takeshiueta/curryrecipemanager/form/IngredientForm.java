@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
  */
 @Data
 public class IngredientForm {
-	/**ID*/
+	/** ID */
 	private Integer id;
 	/** レシピID */
 	@NotNull
@@ -24,11 +24,20 @@ public class IngredientForm {
 	@NotBlank
 	private String unit;
 
+	/** 材料名エラー */
+	private String ingredientNameError;
+
+	/** 分量エラー */
+	private String amountError;
+
+	/** 単位エラー */
+	private String unitError;
+
 	/** コンストラクタ */
 	public IngredientForm() {
 	}
 
-	public IngredientForm(Integer id,Integer recipeId, String ingredientName, String amount, String unit) {
+	public IngredientForm(Integer id, Integer recipeId, String ingredientName, String amount, String unit) {
 		this.id = id;
 		this.recipeId = recipeId;
 		this.ingredientName = ingredientName;

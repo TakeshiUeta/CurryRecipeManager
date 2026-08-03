@@ -55,6 +55,12 @@ public class RecipeService {
 			String recipeName = recipe.getRecipeName();
 			// 調理時間(分)
 			Integer cookingTime = recipe.getCookingTime();
+			// 材料登録フォーム
+			IngredientForm ingredientForm = new IngredientForm();
+			ingredientForm.setRecipeId(recipeId);
+			// 調理手順登録フォーム
+			RecipeStepForm recipeStepForm = new RecipeStepForm();
+			recipeStepForm.setRecipeId(recipeId);
 			// レシピの総合評価（1～5）
 			Integer evaluation = recipe.getEvaluation();
 			// レシピidと紐付いている材料を取得
@@ -77,7 +83,10 @@ public class RecipeService {
 			recipeDetail.setIngredients(ingredientForms);
 			// 調理手順リスト
 			recipeDetail.setRecipeSteps(recipeStepForms);
-
+			// 材料登録フォーム
+			recipeDetail.setIngredientForm(ingredientForm);
+			// 調理手順登録フォーム
+			recipeDetail.setRecipeStepForm(recipeStepForm);
 			recipes.add(recipeDetail);
 		}
 		recipeListDto.setRecipes(recipes);
@@ -135,4 +144,113 @@ public class RecipeService {
 	public void recipeStepDelete(Integer id) {
 		recipeStepMapper.deleteOne(id);
 	}
+
+	/** レシピ詳細DTO取得 */
+	public RecipeDetailDto findRecipeDetailDto(Integer recipeId, RecipeListDto recipeList) {
+		List<RecipeDetailDto> detailDtos = recipeList.getRecipes();
+		// Listを順番に処理できる形に変換
+		RecipeDetailDto recipeDetailDto = detailDtos.stream()
+				// dtoのidと紐付くレシピIdを検索
+				.filter(dto -> dto.getId().equals(recipeId))
+				// 対象のレシピ詳細Dtoを取得
+				.findFirst()
+				// 一致するものがなかった場合nullを返す
+				.orElse(null);
+		return recipeDetailDto;
+	}
+
+	/** 材料フォームに入力値をセットする（登録バリデーション用） */
+	public void restoreValidationInput(IngredientForm form, RecipeListDto recipeList) {
+		// レシピId
+		Integer recipeId = form.getRecipeId();
+		// 材料名
+		String ingredientName = form.getIngredientName();
+		// 分量
+		String amount = form.getAmount();
+		// 単位
+		String unit = form.getUnit();
+		// レシピ詳細をレシピIdからゲット
+		RecipeDetailDto recipe = this.findRecipeDetailDto(recipeId, recipeList);
+		// レシピ詳細DTO取得
+		IngredientForm exForm = recipe.getIngredientForm();
+		// 材料フォームにそれぞれの入力値をセットする
+		exForm.setIngredientName(ingredientName);
+		exForm.setAmount(amount);
+		exForm.setUnit(unit);
+	}
+	
+	/** 調理手順フォームに入力値をセットする（登録バリデーション用） */
+	public void restoreValidationInput(RecipeStepForm form, RecipeListDto recipeList) {
+		// レシピId
+		Integer recipeId = form.getRecipeId();
+		// 手順番号
+		Integer stepNo = form.getStepNo();
+		// 手順内容
+		String content = form.getContent();
+		// レシピ詳細をレシピIdからゲット
+		RecipeDetailDto recipe = this.findRecipeDetailDto(recipeId, recipeList);
+		// レシピ詳細DTO取得
+		RecipeStepForm exForm = recipe.getRecipeStepForm();
+		// 調理手順登録フォームにそれぞれの入力値をセットする
+		exForm.setStepNo(stepNo);
+		exForm.setContent(content);
+	}
+
+	/** 材料フォームに入力値をセットする（更新バリデーション用） */
+	public void restoreUpdateValidationInput(IngredientForm form, RecipeListDto recipeList) {
+		// フォームからIdをゲット
+		Integer id = form.getId();
+		// レシピIdをゲット
+		Integer recipeId = form.getRecipeId();
+		// 材料名をゲット
+		String ingredientName = form.getIngredientName();
+		// 分量をゲット
+		String amount = form.getAmount();
+		// 単位をゲット
+		String unit = form.getUnit();
+		// 詳細リストから対象の詳細クラスをゲット
+		RecipeDetailDto details = this.findRecipeDetailDto(recipeId, recipeList);
+		// 材料フォームリストを詳細dtoからゲット
+		List<IngredientForm> ingredients = details.getIngredients();
+		// 材料フォームリストのidに紐付くindexにフィールドをセットする
+		for (IngredientForm ingredient : ingredients) {
+			// idをゲット
+			Integer exId = ingredient.getId();
+			// フォームからゲットしたidとidが同値の場合フォームの値をセットする
+			if (id != null && id.equals(exId)) {
+				ingredient.setIngredientName(ingredientName);
+				ingredient.setAmount(amount);
+				ingredient.setUnit(unit);
+				break;
+			}
+		}
+	}
+
+	/** 調理手順フォームに入力値をセットする（更新バリデーション用） */
+	public void restoreUpdateValidationInput(RecipeStepForm form, RecipeListDto recipeList) {
+		// フォームからIdをゲット
+		Integer id = form.getId();
+		// レシピIdをゲット
+		Integer recipeId = form.getRecipeId();
+		// 手順番号をゲット
+		Integer stepNo = form.getStepNo();
+		// 手順内容をゲット
+		String content = form.getContent();
+		// 詳細リストから対象の詳細クラスをゲット
+		RecipeDetailDto details = this.findRecipeDetailDto(recipeId, recipeList);
+		// 調理手順フォームリストを詳細dtoからゲット
+		List<RecipeStepForm> recipeSteps = details.getRecipeSteps();
+		// 調理手順フォームリストのidに紐付くindexにフィールドをセットする
+		for (RecipeStepForm recipeStep : recipeSteps) {
+			// idをゲット
+			Integer exId = recipeStep.getId();
+			// フォームからゲットしたidとidが同値の場合フォームの値をセットする
+			if (id != null && id.equals(exId)) {
+				recipeStep.setStepNo(stepNo);
+				recipeStep.setContent(content);
+				break;
+			}
+		}
+	}
+
 }
