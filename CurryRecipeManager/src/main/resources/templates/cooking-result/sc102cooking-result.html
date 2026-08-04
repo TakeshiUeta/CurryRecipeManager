@@ -184,6 +184,7 @@
               <form
                 th:id="'deleteForm-' + ${result.id}"
                 th:action="@{/cooking-result/delete}"
+                onsubmit="return confirm('この調理結果を削除しますか？');"
                 method="post"
               >
                 <input type="hidden" name="id" th:value="${result.id}" />
