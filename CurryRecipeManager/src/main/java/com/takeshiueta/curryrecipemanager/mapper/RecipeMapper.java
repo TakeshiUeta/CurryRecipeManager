@@ -9,14 +9,17 @@ import com.takeshiueta.curryrecipemanager.entity.Recipe;
  */
 @Mapper
 public interface RecipeMapper {
+	/** レシピ1件取得 */
+	public Recipe findById(Integer id);
+
 	/** レシピ名だけ取得 */
 	public String findRecipeNameById(Integer id);
 
+	/**id存在チェック*/
+	public Integer countRecipeById(Integer id);
+
 	/** レシピID一覧取得 */
 	public List<Integer> findRecipeIds();
-
-	/** レシピ1件取得 */
-	public Recipe findById(Integer id);
 
 	/** レシピ全件表示 */
 	public List<Recipe> findAll();

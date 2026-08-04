@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.takeshiueta.curryrecipemanager.dto.CookingResultDetailDto;
 import com.takeshiueta.curryrecipemanager.dto.CookingResultDto;
 import com.takeshiueta.curryrecipemanager.form.CookingResultForm;
+import com.takeshiueta.curryrecipemanager.service.CommonService;
 import com.takeshiueta.curryrecipemanager.service.CookingResultService;
 
 import jakarta.validation.Valid;
@@ -28,14 +29,22 @@ public class CookingResultController {
 
 	@Autowired
 	private CookingResultService cookingResultService;
+	@Autowired
+	private CommonService commonService;
 
-	// 調理結果ボタン押下時
+	/** 調理結果ボタン押下時*/
 	@GetMapping("/sc102cooking-result")
 	public String getSc102CookingResult(@RequestParam(required = false) Integer openResultId, Integer openRecipeId,
 			Model model, @RequestParam Integer recipeId) {
+		// レシピid存在チェック
+		commonService.checkRecipeExists(recipeId);
+		// 調理結果dto
 		CookingResultDto dto = cookingResultService.createCookingResultDto(recipeId);
+		// 調理結果フォーム
 		CookingResultForm cookingResultForm = new CookingResultForm();
+		// 調理結果フォームにレシピidをセット
 		cookingResultForm.setRecipeId(recipeId);
+
 		model.addAttribute("cookingResultForm", cookingResultForm);
 		model.addAttribute("dto", dto);
 		// 画面側のアコーディオン状態管理Ｉｄ
@@ -62,6 +71,9 @@ public class CookingResultController {
 			// 画面遷移
 			return "cooking-result/sc102cooking-result";
 		}
+		// レシピid存在チェック
+		commonService.checkRecipeExists(form.getRecipeId());
+		
 		// 登録
 		cookingResultService.insertCookingResult(form);
 		// 画面遷移
@@ -95,16 +107,19 @@ public class CookingResultController {
 					break; // 見つかったら終了
 				}
 			}
-			//新規作成フォーム
+			// 新規作成フォーム
 			CookingResultForm cookingResultForm = new CookingResultForm();
 			cookingResultForm.setRecipeId(recipeId);
-
-			model.addAttribute("cookingResultForm", cookingResultForm);			model.addAttribute("dto", dto);
+			model.addAttribute("cookingResultForm", cookingResultForm);
+			model.addAttribute("dto", dto);
 			// 画面側のアコーディオン状態管理Ｉｄ
 			model.addAttribute("openResultId", id);
 			// 画面遷移
 			return "cooking-result/sc102cooking-result";
 		}
+		// レシピid存在チェック
+		commonService.checkRecipeExists(form.getRecipeId());
+
 		// 更新
 		cookingResultService.updateCookingResult(form);
 		// 画面遷移
@@ -115,6 +130,8 @@ public class CookingResultController {
 	// 調理結果削除
 	@PostMapping("/delete")
 	public String postDeleteCookingResult(@RequestParam Integer id, @RequestParam Integer recipeId) {
+		// レシピid存在チェック
+		commonService.checkRecipeExists(recipeId);
 		// 削除
 		cookingResultService.deleteOneCookingResult(id);
 		// 画面遷移

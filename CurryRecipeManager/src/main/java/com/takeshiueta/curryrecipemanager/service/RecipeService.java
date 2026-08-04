@@ -36,7 +36,6 @@ public class RecipeService {
 	/** Modelマッパー(オブジェクト変換) */
 	@Autowired
 	private ModelMapper modelMapper;
-
 	/** レシピ一覧作成 */
 	public RecipeListDto createRecipeListDto() {
 		// レシピ情報一覧

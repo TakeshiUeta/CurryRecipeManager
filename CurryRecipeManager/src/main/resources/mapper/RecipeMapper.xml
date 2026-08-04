@@ -33,6 +33,13 @@
 		WHERE id=#{id}
 	</select>
 
+	<!--id存在チェック -->
+	<select id="countRecipeById" resultType="int">
+		SELECT COUNT(*)
+		FROM recipe
+		WHERE id = #{recipeId}
+	</select>
+
 	<!--レシピID一覧取得 -->
 	<select id="findRecipeIds" resultType="java.lang.Integer">
 		SELECT

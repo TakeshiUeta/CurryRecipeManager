@@ -17,6 +17,7 @@ import com.takeshiueta.curryrecipemanager.dto.RecipeListDto;
 import com.takeshiueta.curryrecipemanager.form.IngredientForm;
 import com.takeshiueta.curryrecipemanager.form.RecipeForm;
 import com.takeshiueta.curryrecipemanager.form.RecipeStepForm;
+import com.takeshiueta.curryrecipemanager.service.CommonService;
 import com.takeshiueta.curryrecipemanager.service.RecipeService;
 
 import jakarta.validation.Valid;
@@ -29,6 +30,8 @@ import jakarta.validation.Valid;
 public class RecipeController {
 	@Autowired
 	private RecipeService recipeService;
+	@Autowired
+	private CommonService commonService;
 
 	// レシピ一覧画面遷移
 	@GetMapping("/sc101recipe-list")
@@ -90,7 +93,7 @@ public class RecipeController {
 				// 単位
 				recipe.getIngredientForm().setUnitError(result.getFieldError("unit").getDefaultMessage());
 			}
-
+			//レシピ一覧
 			model.addAttribute("recipeList", recipeList);
 			// レシピ登録フォーム
 			model.addAttribute("recipeForm", new RecipeForm());
@@ -98,6 +101,9 @@ public class RecipeController {
 			model.addAttribute("openRecipeId", form.getRecipeId());
 			return "recipe/sc101recipe-list";
 		}
+		//レシピId存在チェック
+		commonService.checkRecipeExists(form.getRecipeId());
+		
 		// 登録
 		recipeService.ingredientInsert(form);
 		// 画面遷移
@@ -136,6 +142,7 @@ public class RecipeController {
 					break; // 見つかったら終了
 				}
 			}
+			//レシピ一覧
 			model.addAttribute("recipeList", recipeList);
 			// レシピ登録フォーム
 			model.addAttribute("recipeForm", new RecipeForm());
@@ -144,6 +151,9 @@ public class RecipeController {
 			// 画面遷移
 			return "recipe/sc101recipe-list";
 		}
+		//レシピId存在チェック
+		commonService.checkRecipeExists(form.getRecipeId());
+
 		// 更新
 		recipeService.ingredientUpdate(form);
 		// 画面遷移
@@ -153,6 +163,9 @@ public class RecipeController {
 	// 材料削除
 	@PostMapping("/ingredient/delete")
 	public String postIngredientDelete(Integer id, Integer recipeId) {
+		//レシピId存在チェック
+		commonService.checkRecipeExists(recipeId);
+
 		// 削除
 		recipeService.ingredientDelete(id);
 		// 画面遷移
@@ -180,6 +193,7 @@ public class RecipeController {
 				// 調理内容
 				recipe.getRecipeStepForm().setContentError(result.getFieldError("content").getDefaultMessage());
 			}
+			//レシピ一覧
 			model.addAttribute("recipeList", recipeList);
 			// レシピ登録フォーム
 			model.addAttribute("recipeForm", new RecipeForm());
@@ -188,6 +202,9 @@ public class RecipeController {
 			// 画面遷移
 			return "recipe/sc101recipe-list";
 		}
+		//レシピId存在チェック
+		commonService.checkRecipeExists(form.getRecipeId());
+
 		// 登録
 		recipeService.recipeStepInsert(form);
 		// 画面遷移
@@ -223,9 +240,10 @@ public class RecipeController {
 						// 調理内容
 						recipeStep.setContentError(result.getFieldError("content").getDefaultMessage());
 					}
-					break;//見つかったら終了
+					break;// 見つかったら終了
 				}
 			}
+			//レシピ一覧
 			model.addAttribute("recipeList", recipeList);
 			// レシピ登録フォーム
 			model.addAttribute("recipeForm", new RecipeForm());
@@ -234,6 +252,9 @@ public class RecipeController {
 			// 画面遷移
 			return "recipe/sc101recipe-list";
 		}
+		//レシピId存在チェック
+		commonService.checkRecipeExists(form.getRecipeId());
+
 		// 更新
 		recipeService.recipeStepUpdate(form);
 		// 画面遷移
@@ -243,6 +264,9 @@ public class RecipeController {
 	// 調理手順削除
 	@PostMapping("/recipeStep/delete")
 	public String postRecipeStepDelete(Integer id, Integer recipeId) {
+		//レシピId存在チェック
+		commonService.checkRecipeExists(recipeId);
+
 		// 削除
 		recipeService.recipeStepDelete(id);
 		// 画面遷移
