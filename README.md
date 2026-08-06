@@ -7,6 +7,17 @@ Spring Boot・MyBatis・Thymeleafを用いて開発した、
 
 データベース設計からバックエンド、画面実装まで一貫して実装しました。
 
+## 🌐 公開URL
+
+以下のURLから実際に動作確認できます。
+
+🔗 https://curryrecipemanager.onrender.com/recipe/sc101recipe-list
+
+※デモ用途のため、サンプルレシピデータを登録しています。  
+※Render無料プラン利用のため、初回アクセス時は起動に時間がかかる場合があります。
+
+---
+
 ## Release
 
 ### Version 1.0.0
